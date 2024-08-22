@@ -1,0 +1,11 @@
+model {
+    for (i in 1:236) {
+        for (j in 1:5){
+            usesMarijuana[i,j] ~ dbern(prob[i,j])
+            logit(prob[i,j]) <- betaintercept+betafemale*female[i] + betayear*yearscaled[j]
+        }
+    }
+    betaintercept ~ dt(0, 0.01, 1)
+    betafemale ~ dt(0, 0.16, 1)
+    betayear ~ dt(0, 0.16, 1)
+}
